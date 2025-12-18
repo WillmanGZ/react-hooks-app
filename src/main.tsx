@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 /* import { TrafficLightWithHook } from "./useEffect/TrafficLightWithHook"; */
 /* import { PokemonPage } from "./examples/PokemonPage";*/
 /* import { FocusScreen } from "./useRef/FocusScreen"; */
+import { TasksApp } from "./useReducer/TaskApp";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
@@ -16,5 +17,6 @@ createRoot(document.getElementById("root")!).render(
     {/* <TrafficLightWithHook /> */}
     {/* <PokemonPage /> */}
     {/* <FocusScreen /> */}
+    <TasksApp />
   </StrictMode>
 );
