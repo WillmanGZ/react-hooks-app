@@ -1,13 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "./index.css";
 /* import { HooksApp } from "./HooksApp"; */
 /* import { TrafficLight } from "./useState/TrafficLight"; */
 /* import { TrafficLightWithEffect } from "./useEffect/TrafficLightWithEffect"; */
 /* import { TrafficLightWithHook } from "./useEffect/TrafficLightWithHook"; */
 /* import { PokemonPage } from "./examples/PokemonPage";*/
 /* import { FocusScreen } from "./useRef/FocusScreen"; */
-import { TasksApp } from "./useReducer/TaskApp";
-import "./index.css";
+/* import { TasksApp } from "./useReducer/TaskApp"; */
+import { ScrambleWords } from "./useReducer/ScrambleWords";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
     {/* <TrafficLightWithHook /> */}
     {/* <PokemonPage /> */}
     {/* <FocusScreen /> */}
-    <TasksApp />
+    {/* <TasksApp /> */}
+    {<ScrambleWords />}
   </StrictMode>
 );
