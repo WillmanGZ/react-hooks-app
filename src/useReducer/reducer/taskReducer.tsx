@@ -1,8 +1,12 @@
-import type { Todo } from "../TaskApp";
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
 
 interface TaskState {
   todos: Todo[];
-  leght: number;
+  lenght: number;
   completed: number;
   pending: number;
 }
@@ -12,9 +16,78 @@ export type TaskAction =
   | { type: "TOGGLE_TODO"; payload: number }
   | { type: "DELETE_TODO"; payload: number };
 
+export const getTasksInitialState = (): TaskState => {
+  return {
+    todos: [],
+    lenght: 0,
+    completed: 0,
+    pending: 0,
+  };
+};
+
 export const taskReducer = (
   state: TaskState,
   action: TaskAction
 ): TaskState => {
-  return state;
+  switch (action.type) {
+    case "ADD_TODO": {
+      const newTodo: Todo = {
+        id: Date.now(),
+        text: action.payload,
+        completed: false,
+      };
+
+      const updatedTodos = [...state.todos, newTodo];
+
+      const completedTodos = updatedTodos.filter((todo) => todo.completed);
+
+      const pendingTodos = updatedTodos.filter((todo) => !todo.completed);
+
+      return {
+        todos: updatedTodos,
+        lenght: updatedTodos.length,
+        completed: completedTodos.length,
+        pending: pendingTodos.length,
+      };
+    }
+
+    case "TOGGLE_TODO": {
+      const updatedTodos = state.todos.map((todo) =>
+        todo.id === action.payload
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      );
+
+      const completedTodos = updatedTodos.filter((todo) => todo.completed);
+
+      const pendingTodos = updatedTodos.filter((todo) => !todo.completed);
+
+      return {
+        todos: updatedTodos,
+        lenght: updatedTodos.length,
+        completed: completedTodos.length,
+        pending: pendingTodos.length,
+      };
+    }
+
+    case "DELETE_TODO": {
+      const updatedTodos = state.todos.filter(
+        (todo) => todo.id != action.payload
+      );
+
+      const completedTodos = updatedTodos.filter((todo) => todo.completed);
+
+      const pendingTodos = updatedTodos.filter((todo) => !todo.completed);
+
+      return {
+        todos: updatedTodos,
+        lenght: updatedTodos.length,
+        completed: completedTodos.length,
+        pending: pendingTodos.length,
+      };
+    }
+
+    default:
+      return state;
+  }
 };
