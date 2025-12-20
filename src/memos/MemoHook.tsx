@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { MyTitle } from "./UI/MyTitle";
 import { MySubTitle } from "./UI/MySubTitle";
 
@@ -6,12 +6,16 @@ export const MemoHook = () => {
   const [title, setTitle] = useState("Hola");
   const [subTitle, setSubTitle] = useState("Mundo");
 
+  const handleMyApiCall = useCallback(() => {
+    console.log("Llamar a la API -", subTitle);
+  }, [subTitle]);
+
   return (
     <div className="bg-gradient flex flex-col gap-4 ">
       <h1 className="text-2xl font-thin text-white">Memo App</h1>
 
       <MyTitle title={title} />
-      <MySubTitle subtitle={subTitle} />
+      <MySubTitle subtitle={subTitle} callMyApi={handleMyApiCall} />
 
       <button
         onClick={() => setTitle("Hello")}
